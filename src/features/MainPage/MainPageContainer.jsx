@@ -8,7 +8,7 @@ const MainPageContainer = (props) => {
 
   useEffect(() => {
     props.getAllAnimals();
-  });
+  }, []);
 
   return (
     <MainPage {...props} />

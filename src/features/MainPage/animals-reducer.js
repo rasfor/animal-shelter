@@ -30,7 +30,21 @@ export const getAllAnimals = () => {
   return async (dispacth) => {
     const response = await animalsApi.getAllAnimals();
     if (response.data !== null)
-      dispacth(getAllAnimalsActionCreator(response.data));
+      dispacth(getAllAnimalsActionCreator(response.data.value));
+  }
+}
+
+export const filterAnimals = (animalType) => {
+  return async (dispacth) => {
+    const response = await animalsApi.getAllAnimals();
+    if (response.data !== null) {
+      if (animalType === 'ALL') dispacth(getAllAnimalsActionCreator(response.data.value));
+      else {
+        let filteredData = response.data.value.filter((animal) => animal.AnimalType_ID == animalType)
+        dispacth(getAllAnimalsActionCreator(filteredData));
+      }
+
+    }
   }
 }
 
